@@ -18,7 +18,7 @@
 	</properties>
 	
 	
-	  <repositories>
+	     <repositories>
         <repository>
             <id>jboss</id>
             <name>JBoss repository</name>
@@ -26,11 +26,8 @@
         </repository>
     </repositories>
 
-	
-	
-	
-	<dependencies>
-   <dependency>
+    <dependencies>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${project.parent.version}</version>
@@ -76,27 +73,27 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.6.0</version>
+            <version>42.2.16</version>
             <scope>runtime</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>6.0.13</version>
+            <version>5.2.8.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.2.13.Final</version>
+            <version>5.4.21.Final</version>
         </dependency>
 
         <dependency>
@@ -104,31 +101,35 @@
             <artifactId>HikariCP</artifactId>
             <version>3.4.5</version>
         </dependency>
-	</dependencies>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${project.parent.version}</version>
+            </plugin>
 
-	<build>
-		<plugins>
-			        <plugin>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-maven-plugin</artifactId>
-            <version>4.0.0</version>
-                 <configuration>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.0.0</version>
+                <configuration>
                     <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
                     <driver>org.postgresql.Driver</driver>
                     <url>${env.DATABASE_URL}</url>
                     <username>${env.DATABASE_USERNAME}</username>
                     <password>${env.DATABASE_PASSWORD}</password>
                 </configuration>
-            <executions>
-                <execution>
-               <phase>process-resources</phase>
-
-                    <goals>
-                        <goal>update</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
